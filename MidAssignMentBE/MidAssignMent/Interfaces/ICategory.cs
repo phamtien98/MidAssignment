@@ -1,13 +1,14 @@
-﻿using MidAssignMentFE.DTO;
-using MidAssignMentFE.Models;
+﻿using MidAssignMentBE.DTO;
+using MidAssignMentBE.Models;
 
-namespace MidAssignMentFE.Interfaces
+namespace MidAssignMentBE.Interfaces
 {
     public interface ICategory
     {
         List<Category> GetCategories();
-        Category AddCategory(CategoryDTO category);
-        Category EditCategory (int id , CategoryDTO category);
+        void AddCategory(CategoryDTO category);
+        void EditCategory (int id , CategoryDTO category);
         void DeleteCategory(int id);
+        Category FindCategoryById(int id);
     }
 }

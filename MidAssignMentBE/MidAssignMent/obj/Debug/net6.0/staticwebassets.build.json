@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "lzI7gj3NVAoZD1hyII4rk9vDb513FwToMey4X3mV2Yw=",
-  "Source": "MidAssignMentFE",
-  "BasePath": "_content/MidAssignMentFE",
+  "Hash": "3LOLl+fkKt5luvWRMnlfGzvbtN5x8sdBLLum95e5RU8=",
+  "Source": "MidAssignMentBE",
+  "BasePath": "_content/MidAssignMentBE",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

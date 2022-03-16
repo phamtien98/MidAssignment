@@ -1,9 +1,9 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using MidAssignMentFE.Interfaces;
-using MidAssignMentFE.Models;
-using MidAssignMentFE.Service;
+using MidAssignMentBE.Interfaces;
+using MidAssignMentBE.Models;
+using MidAssignMentBE.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICategory, CategoryService>();
+builder.Services.AddScoped<IBooK, BookService>();
 builder.Services.AddCors();
 builder.Services.AddDbContext<LibraryManagementContext>(options => options.UseSqlServer("name=ConnectionStrings:ProductConnection"));
 var app = builder.Build();

@@ -1,7 +1,8 @@
-﻿namespace MidAssignMentFE.DTO
+﻿namespace MidAssignMentBE.DTO
 {
     public class CategoryDTO
     {
-        public string CategoryName { get; set; } = null!;
+        public string Name { get; set; } = null!;
+        public string Description { get; set; } = null!;
     }
 }

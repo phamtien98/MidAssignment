@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace MidAssignMentFE.Models
+namespace MidAssignMentBE.Models
 {
     public partial class LibraryManagementContext : DbContext
     {
@@ -16,7 +16,10 @@ namespace MidAssignMentFE.Models
         {
         }
 
+        public virtual DbSet<Admin> Admins { get; set; } = null!;
         public virtual DbSet<Book> Books { get; set; } = null!;
+        public virtual DbSet<BookBorrowingRequest> BookBorrowingRequests { get; set; } = null!;
+        public virtual DbSet<BookBorrowingRequestDetail> BookBorrowingRequestDetails { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
@@ -31,6 +34,15 @@ namespace MidAssignMentFE.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Admin>(entity =>
+            {
+                entity.ToTable("Admin");
+
+                entity.Property(e => e.Password).IsUnicode(false);
+
+                entity.Property(e => e.Username).IsUnicode(false);
+            });
+
             modelBuilder.Entity<Book>(entity =>
             {
                 entity.ToTable("Book");
@@ -38,21 +50,46 @@ namespace MidAssignMentFE.Models
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Books)
                     .HasForeignKey(d => d.CategoryId)
-                    .HasConstraintName("fk_id");
+                    .HasConstraintName("fk_book");
+            });
+
+            modelBuilder.Entity<BookBorrowingRequest>(entity =>
+            {
+                entity.ToTable("BookBorrowingRequest");
+
+                entity.HasOne(d => d.ProcessByUser)
+                    .WithMany(p => p.BookBorrowingRequests)
+                    .HasForeignKey(d => d.ProcessByUserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__BookBorro__Proce__5DCAEF64");
+
+                entity.HasOne(d => d.RequestedByUser)
+                    .WithMany(p => p.BookBorrowingRequests)
+                    .HasForeignKey(d => d.RequestedByUserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__BookBorro__Reque__5CD6CB2B");
+            });
+
+            modelBuilder.Entity<BookBorrowingRequestDetail>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.HasOne(d => d.BookBorrowingRequest)
+                    .WithMany()
+                    .HasForeignKey(d => d.BookBorrowingRequestId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__BookBorro__BookB__5BE2A6F2");
+
+                entity.HasOne(d => d.Book)
+                    .WithMany()
+                    .HasForeignKey(d => d.BookId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__BookBorro__BookI__5AEE82B9");
             });
 
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.ToTable("Category");
-            });
-
-            modelBuilder.Entity<User>(entity =>
-            {
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Email).IsUnicode(false);
-
-                entity.Property(e => e.Password).IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

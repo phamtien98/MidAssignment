@@ -9789,11 +9789,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\minht\\source\\repos\\MidAssignment\\MidAssignMent\\MidAssignMentFE.csproj",
-      "projectName": "MidAssignMentFE",
-      "projectPath": "C:\\Users\\minht\\source\\repos\\MidAssignment\\MidAssignMent\\MidAssignMentFE.csproj",
+      "projectUniqueName": "C:\\Users\\minht\\OneDrive\\Tài liệu\\GitHub\\MidAssignment\\MidAssignMentBE\\MidAssignMent\\MidAssignMentBE.csproj",
+      "projectName": "MidAssignMentBE",
+      "projectPath": "C:\\Users\\minht\\OneDrive\\Tài liệu\\GitHub\\MidAssignment\\MidAssignMentBE\\MidAssignMent\\MidAssignMentBE.csproj",
       "packagesPath": "C:\\Users\\minht\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\minht\\source\\repos\\MidAssignment\\MidAssignMent\\obj\\",
+      "outputPath": "C:\\Users\\minht\\OneDrive\\Tài liệu\\GitHub\\MidAssignment\\MidAssignMentBE\\MidAssignMent\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\minht\\AppData\\Roaming\\NuGet\\NuGet.Config",

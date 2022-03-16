@@ -8,7 +8,10 @@ import {
   Route,
 } from "react-router-dom";
 import LoginPageAdmin from './adminPage/LoginPage/loginPageAdmin';
-import AddCategory from './adminPage/AddCategory/AddCategory';
+import AddCategory from './adminPage/CRUDCategory/AddCategory';
+import HomePageAdmin from './adminPage/HomePageAdmin/HomePageAdmin';
+import EditCategory from './adminPage/CRUDCategory/EditCategory';
+import DeleteCategory from './adminPage/CRUDCategory/DeleteCategory';
 
 function App() {
 
@@ -17,7 +20,10 @@ function App() {
     <Routes>
       <Route path="/" element={<HomePageUser />}> </Route>
       <Route path="/admin" element={<LoginPageAdmin />}> </Route>
+      <Route path="/admin/home" element={<HomePageAdmin />}> </Route>
       <Route path="/admin/add" element={<AddCategory />}> </Route>
+      <Route path="/admin/edit/:id" element={<EditCategory />}> </Route>
+      <Route path="/admin/delete/:id" element={<DeleteCategory />}> </Route>
     </Routes>
   </BrowserRouter>
   

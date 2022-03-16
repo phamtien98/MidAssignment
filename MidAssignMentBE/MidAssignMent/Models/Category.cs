@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MidAssignMentFE.Models
+namespace MidAssignMentBE.Models
 {
     public partial class Category
     {
@@ -11,7 +11,8 @@ namespace MidAssignMentFE.Models
         }
 
         public int CategoryId { get; set; }
-        public string CategoryName { get; set; } = null!;
+        public string Name { get; set; } = null!;
+        public string Description { get; set; } = null!;
 
         public virtual ICollection<Book> Books { get; set; }
     }

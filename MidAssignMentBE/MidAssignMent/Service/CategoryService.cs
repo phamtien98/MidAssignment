@@ -1,9 +1,10 @@
-﻿using MidAssignMentFE.DTO;
-using MidAssignMentFE.Interfaces;
-using MidAssignMentFE.Models;
+﻿using MidAssignMentBE.DTO;
+using MidAssignMentBE.Interfaces;
+using MidAssignMentBE.Models;
 
-namespace MidAssignMentFE.Service
+namespace MidAssignMentBE.Service
 {
+
     public class CategoryService : ICategory
     {
         private LibraryManagementContext _dbContext;
@@ -11,14 +12,18 @@ namespace MidAssignMentFE.Service
         {
             _dbContext = dbContext;
         }
-        public Category AddCategory(CategoryDTO category)
+        public void AddCategory(CategoryDTO category)
         {
-            var addCategory = _dbContext.Categories.Add(new Category
+            var item = _dbContext.Categories.Where(m=>m.Name == category.Name).FirstOrDefault();
+            if(item == null)
             {
-                CategoryName = category.CategoryName
-            });
-            _dbContext.SaveChanges();
-            return addCategory.Entity;
+                var addCategory = _dbContext.Categories.Add(new Category
+                {
+                    Name = category.Name,
+                    Description = category.Description,
+                });
+                _dbContext.SaveChanges();
+            }
         }
 
         public void DeleteCategory(int id)
@@ -31,16 +36,20 @@ namespace MidAssignMentFE.Service
             }
         }
 
-        public Category EditCategory(int id, CategoryDTO category)
+        public void EditCategory(int id, CategoryDTO category)
         {
             var item = _dbContext.Categories.Find(id);
             if(item != null)
             {
-                item.CategoryName = category.CategoryName;
+                item.Name = category.Name;
+                item.Description = category.Description;    
                 _dbContext.SaveChanges();
-                return item;
             }
-            return null;
+        }
+
+        public Category FindCategoryById(int id)
+        {
+            return _dbContext.Categories.Find(id);
         }
 
         public List<Category> GetCategories()

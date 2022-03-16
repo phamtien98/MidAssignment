@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MidAssignMentFE.DTO;
-using MidAssignMentFE.Interfaces;
-using MidAssignMentFE.Models;
+using MidAssignMentBE.DTO;
+using MidAssignMentBE.Interfaces;
+using MidAssignMentBE.Models;
 
 namespace MidAssignMentFE.Controllers
 {
@@ -23,21 +23,41 @@ namespace MidAssignMentFE.Controllers
         }
 
         [HttpPost("/add-new-category")]
-        public Category Add( [FromBody] CategoryDTO category)
+        public IActionResult Add( [FromBody] CategoryDTO category)
         {
-            return _category.AddCategory(category);
+            if(ModelState.IsValid)
+            {
+                _category.AddCategory(category);
+                return Content("Add Successfully");
+            }
+            return Content("Fail");
         }
 
         [HttpPut("/edit-category")]
-        public Category Add(int id ,[FromBody] CategoryDTO category)
+        public IActionResult Edit(int id ,[FromBody] CategoryDTO category)
         {
-            return _category.EditCategory(id,category);
+            var item = _category.FindCategoryById(id);
+            if(item != null)
+            {
+                _category.EditCategory(id, category);
+                return Ok();
+            }
+            return BadRequest("Not found category!");
+             
         }
         
         [HttpDelete("/delete-category")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-            _category.DeleteCategory(id);
+            var item = _category.FindCategoryById(id);
+            if (item != null)
+            {
+                _category.DeleteCategory(id);
+                return Content("Delete Success");
+            }
+            return BadRequest("Not found category!");
+
+
         }
     }
 }
